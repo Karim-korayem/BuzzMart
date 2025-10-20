@@ -8,8 +8,8 @@ export default async function ProductsDetails({
   params: { id: string };
 }) {
   const { id } = await params;
-  const { data: productsDetails } = await getProductsDetails(id);
- 
+const response = await getProductsDetails(id);
+const productsDetails = response?.data; 
 
   return <div className="mx-auto container ">
 <ProductsDetailsComp productsDetails={productsDetails} ></ProductsDetailsComp>

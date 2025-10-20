@@ -2,7 +2,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -11,8 +10,8 @@ import { getCashPayment, getOnlinePayment } from "../actions/payment.action";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
-export default function checkoutPage() {
-  const [errorMessage, seterrorMessage] = useState(null);
+export default function CheckoutPage() {
+  const [errorMessage] = useState(null);
   const router = useRouter();
   const { cartDetails, setCartdetails } = useCart();
   const [paymentMethod, setPaymentMethod] = useState<"cash" | "online" | null>(
@@ -22,7 +21,7 @@ export default function checkoutPage() {
   interface Inputs {
     details: string;
     city: string;
-    phone: number;
+    phone: string;
   }
   const {
     register,
@@ -32,7 +31,9 @@ export default function checkoutPage() {
   async function onSubmit(values: Inputs) {
     if (paymentMethod == "cash") {
       try {
-        const response = await getCashPayment(cartId as string, values);
+        const response = await getCashPayment(cartId as string, {
+          shippingAdress: values,
+        });
         console.log(response);
         if (response?.data.status === "success") {
           setCartdetails(null);
@@ -43,7 +44,9 @@ export default function checkoutPage() {
       }
     } else if (paymentMethod == "online") {
       try {
-        const response = await getOnlinePayment(cartId as string, values);
+        const response = await getOnlinePayment(cartId as string, {
+          shippingAdress: values,
+        });
         console.log(response);
         if (response?.data.status === "success") {
           window.location.href = response.data.session.url;

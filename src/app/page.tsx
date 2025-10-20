@@ -10,10 +10,11 @@ export default async function Home() {
   const session = await getServerSession(options);
   console.log(session);
 
-  const response = await getCategories();  
+  const response = await getCategories();
   const data = response?.data;
   console.log(data);
-  const { data: products } = await getProducts();
+  const responseProducts = await getProducts();
+  const products = responseProducts?.data;
   return (
     <>
       <MainSlider />

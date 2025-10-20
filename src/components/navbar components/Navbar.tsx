@@ -18,13 +18,10 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { NavLink } from "../ui/NavLink";
 import { useWishlist } from "@/app/context/WishlistContext";
 
-export default function () {
+export default function Navbar () {
   const session = useSession();
   const { cartDetails } = useCart();
   const { wishlistDetails } = useWishlist();
- 
-  
-  
 
   return (
     <div>
@@ -84,14 +81,12 @@ export default function () {
                   variant="default"
                   className="absolute top-[-13px] right-[-18px]  rounded-full"
                 >
-                 
-                    <Badge
-                      variant="default"
-                      className="absolute top-[-13px] right-[-18px] rounded-full"
-                    >
-                     ({wishlistDetails?.length || 0})
-                    </Badge>
-                  
+                  <Badge
+                    variant="default"
+                    className="absolute top-[-13px] right-[-18px] rounded-full"
+                  >
+                    ({wishlistDetails?.length || 0})
+                  </Badge>
                 </Badge>
                 <Heart />
                 Wishlist
@@ -139,7 +134,9 @@ export default function () {
                 <NavLink href="/cart">
                   Cart ({cartDetails?.numOfCartItems || 0})
                 </NavLink>
-                <NavLink href="/wishlist">Wishlist ({wishlistDetails?.length || 0})</NavLink>
+                <NavLink href="/wishlist">
+                  Wishlist ({wishlistDetails?.length || 0})
+                </NavLink>
                 {session.data ? (
                   <button
                     onClick={() => signOut({ callbackUrl: "/Log-in" })}

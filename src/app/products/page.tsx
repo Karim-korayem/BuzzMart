@@ -5,8 +5,8 @@ import { getUserCart } from "../actions/cart.action";
 import { Circle } from "lucide-react";
 
 export default async function ProductsPage() {
-  const { data: products } = await getProducts();
-await getUserCart()
+const response = await getProducts();
+const products = response?.data;await getUserCart()
   return (
     <div>
 
