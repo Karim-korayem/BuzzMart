@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -89,6 +90,15 @@ export default function RegisterPage() {
         <Button type="submit" className="px-7 py-5 mt-4 cursor-pointer">
           Register
         </Button>
+        <p className="text-center mt-3">
+          Already have an account?{" "}
+          <Link
+            href="/Log-in"
+            className="font-medium text-primary underline hover:text-primary/80 transition-colors"
+          >
+            Log in here
+          </Link>
+        </p>
       </form>
     </div>
   );

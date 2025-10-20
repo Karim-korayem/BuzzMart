@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -24,16 +25,15 @@ export default function LogInPage() {
       const response = await signIn("credentials", {
         email: values.email,
         password: values.password,
-        redirect:false
+        redirect: false,
       });
       console.log(response);
-       if(response?.ok){
-        router.push("/")
+      if (response?.ok) {
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
     }
-    
   }
   return (
     <div className="w-1/2 mx-auto my-10">
@@ -61,6 +61,15 @@ export default function LogInPage() {
         <Button type="submit" className="px-7 py-5 mt-4 cursor-pointer">
           Log in
         </Button>
+        <p className=" text-center mt-3">
+          Don’t have an account?{" "}
+          <Link
+            href="/Register"
+            className="font-medium text-primary underline hover:text-primary/80 transition-colors"
+          >
+            Sign up now
+          </Link>
+        </p>{" "}
       </form>
     </div>
   );

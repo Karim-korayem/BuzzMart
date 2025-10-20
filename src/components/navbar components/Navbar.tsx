@@ -85,7 +85,7 @@ export default function Navbar () {
                     variant="default"
                     className="absolute top-[-13px] right-[-18px] rounded-full"
                   >
-                    ({wishlistDetails?.length || 0})
+                    ({wishlistDetails?.length})
                   </Badge>
                 </Badge>
                 <Heart />
